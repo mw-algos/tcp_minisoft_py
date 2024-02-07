@@ -1,6 +1,0 @@
-holding,telegram_qty,start_name,avail,update_required,instrument_expiry_date,strike_price_position,product_type,instrument_exchange,instrument_segment,instrument_token,instrument_trading_symbol,instrument_name,XV19372,multi_quan,default_quantity,running_quantity
-N,1,day_open_strategy,Y,N,19-04-2023,0,NRML,NFO,NFO-OPT,NSE:BANKNIFTY22NOVFUT,NSE:NIFTYBANK-INDEX,NSE:BANKNIFTY,1,N,15,15
-N,1,day_open_strategy,Y,N,19-04-2023,0,NRML,NFO,NFO-OPT,NSE:BANKNIFTY22NOVFUT,NSE:MIDCPNIFTY-INDEX,NSE:MIDCPNIFTY,1,N,75,75
-N,1,day_open_strategy,Y,N,19-04-2023,0,NRML,NFO,NFO-OPT,NSE:BANKNIFTY22NOVFUT,NSE:FINNIFTY-INDEX,NSE:FINNIFTY,1,N,40,40
-N,1,day_open_strategy,Y,N,19-04-2023,0,NRML,NFO,NFO-OPT,NSE:BANKNIFTY22NOVFUT,NSE:NIFTY50-INDEX,NSE:NIFTY,1,N,50,50
-N,1,day_open_strategy,Y,N,19-04-2023,0,NRML,NFO,NFO-OPT,NSE:BANKNIFTY22NOVFUT,BSE:SENSEX-INDEX,BSE:SENSEX,1,N,10,10

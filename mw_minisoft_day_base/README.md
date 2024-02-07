@@ -4,7 +4,7 @@
 
     https://packaging.python.org/en/latest/tutorials/packaging-projects/
 
-**Use the following commands for packaging, build, and upload purpose**
+**Use the following commands for packaging, build, and upload purpose / upgrade **
 
     pip install selenium    
     

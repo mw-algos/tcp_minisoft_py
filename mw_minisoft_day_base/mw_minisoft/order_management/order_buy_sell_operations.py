@@ -11,7 +11,7 @@ def user_position_enter(inst_order_last_record, inst_record, user_record, user_s
         data = {"symbol": trading_symbol, "ohlcv_flag": "1"}
         price_last, order_info = 0, "order info not available"
         order_qty = multi_order_qty_normal_original(inst_record, user_record.user_id)
-        market_type = 'INTRADAY' #"INTRADAY"
+        market_type = 'INTRADAY'  # "INTRADAY"
         try:
             price_last = (user_session.depth(data)['d'][trading_symbol]['ask'])[4]['price']
         except Exception as exception:
@@ -20,7 +20,8 @@ def user_position_enter(inst_order_last_record, inst_record, user_record, user_s
                         'ticks_ind_running_qt: %s , price: %s ', trading_symbol, user_record.user_id,
                         order_qty, price_last)
         data = {"symbol": trading_symbol, "qty": str(order_qty), "type": 1, "side": 1,
-                "productType": market_type, "limitPrice": price_last, "stopPrice": 0, "validity": "DAY", "disclosedQty": 0,
+                "productType": market_type, "limitPrice": price_last, "stopPrice": 0, "validity": "DAY",
+                "disclosedQty": 0,
                 "offlineOrder": "False", "stopLoss": 0, "takeProfit": 0}
         try:
             order_info = user_session.place_order(data)

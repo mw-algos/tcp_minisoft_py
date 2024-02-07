@@ -8,7 +8,8 @@ def build_super_trend_results(df_bk_converted_data, period, multiplier, freq):
     df_bk_converted_data = convert_specific_time_frame(df_bk_converted_data, freq)
     req_columns = ['true_range', 'average_true_range_period_7', 'final_ub', 'final_lb', 'uptrend', 'super_trend_7_3',
                    'super_trend_direction_7_3']
-    req_columns_sp = ['date', 'date_on', 'date_on_str', 'open', 'close', 'low', 'high', 'volume', 'super_long_sell_side']
+    req_columns_sp = ['date', 'date_on', 'date_on_str', 'open', 'close', 'low', 'high', 'volume',
+                      'super_long_sell_side']
     df_bk_converted_data = df_bk_converted_data.loc[:, ~df_bk_converted_data.columns.str.contains('^Unnamed')]
     df_bk_converted_data = df_bk_converted_data.reset_index()
     df_bk_converted_data['date'] = pd.to_datetime(df_bk_converted_data['date'])

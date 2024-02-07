@@ -13,6 +13,7 @@ CLIENT_CAPITAL = 'resources/telegram/client_capital.csv'
 DAY_INSTRUMENT_ORDERS = 'resources/telegram/day_instrument_orders.csv'
 DATA_BACK_UP_FOLDER = 'resources/account_data/data_backup'
 
+
 def create_indicator_order_file(instrument_token, data_interval):
     return ORDERS_FOLDER_ + str(instrument_token) + '_Orders_' + str(data_interval) + '.csv '
 

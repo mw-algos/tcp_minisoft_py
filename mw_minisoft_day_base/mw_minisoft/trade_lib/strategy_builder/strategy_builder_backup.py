@@ -46,7 +46,8 @@ def build_super_trend_results(raw_df_date, period, multiplier):
 def strategy_data_builder_(instrument_history_data, auto_inputs, instrument_name):
     default_time_frame = build_super_trend_results(instrument_history_data, period=7, multiplier=3)
 
-    df_bk_one_3min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='3min', period=7, multiplier=3)
+    df_bk_one_3min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='3min', period=7,
+                                                      multiplier=3)
     df_bk_one_3min_data = df_bk_one_3min_data[['super_trend_7_3', 'super_trend_direction_7_3']]
     df_bk_one_3min_data_col = {'super_trend_7_3': 'sp_7_3_3min', 'super_trend_direction_7_3': 'sp_dir_7_3_3min'}
     df_bk_one_3min_data = df_bk_one_3min_data.rename(columns=df_bk_one_3min_data_col)
@@ -54,8 +55,10 @@ def strategy_data_builder_(instrument_history_data, auto_inputs, instrument_name
     df_bk_one_3min_data['date'] = df_bk_one_3min_data['date'] + timedelta(minutes=3)
     df_bk_one_3min_data = df_bk_one_3min_data.set_index('date')
 
-    df_bk_one_5min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7, multiplier=3)
-    df_bk_one_5min_data_7_1 = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7, multiplier=1)
+    df_bk_one_5min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7,
+                                                      multiplier=3)
+    df_bk_one_5min_data_7_1 = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7,
+                                                          multiplier=1)
     df_bk_one_5min_data['super_trend_direction_7_1'] = df_bk_one_5min_data_7_1['super_trend_direction_7_3']
 
     df_bk_one_5min_data = df_bk_one_5min_data.reset_index()
@@ -66,9 +69,11 @@ def strategy_data_builder_(instrument_history_data, auto_inputs, instrument_name
     df_bk_one_5min_group_by_days_data = pd.DataFrame({'days': list(df_bk_one_5min_group_by_days.groups.keys())})
     df_bk_one_5min_data = day_open_strategy(df_bk_one_5min_data, df_bk_one_5min_group_by_days_data, instrument_name)
 
-    df_bk_one_5min_data_col = ['date', 'super_trend_7_3', 'super_trend_direction_7_3', 'super_trend_direction_7_1', 'day_open_strategy']
+    df_bk_one_5min_data_col = ['date', 'super_trend_7_3', 'super_trend_direction_7_3', 'super_trend_direction_7_1',
+                               'day_open_strategy']
     df_bk_one_5min_data = df_bk_one_5min_data[df_bk_one_5min_data_col]
-    df_bk_one_5min_data_col_final = {'super_trend_7_3': 'sp_7_3_5min', 'super_trend_direction_7_3': 'sp_dir_7_3_5min', 'super_trend_direction_7_1': 'sp_dir_7_1_5min'}
+    df_bk_one_5min_data_col_final = {'super_trend_7_3': 'sp_7_3_5min', 'super_trend_direction_7_3': 'sp_dir_7_3_5min',
+                                     'super_trend_direction_7_1': 'sp_dir_7_1_5min'}
     df_bk_one_5min_data = df_bk_one_5min_data.rename(columns=df_bk_one_5min_data_col_final)
     df_bk_one_5min_data['date'] = df_bk_one_5min_data['date'] + timedelta(minutes=5)
     df_bk_one_5min_data = df_bk_one_5min_data.set_index('date')
@@ -93,7 +98,8 @@ def strategy_data_builder(instrument_history_data, auto_inputs, instrument_name)
                                                 auto_inputs['super_trend_multiplier'][0])
 
     df_bank_nifty_super_trend_7_1 = super_trend(instrument_history_data.copy(), auto_inputs['super_trend_period'][0], 1)
-    df_bank_nifty_super_trend_7_3['super_trend_direction_7_1'] = df_bank_nifty_super_trend_7_1['super_trend_direction_7_3']
+    df_bank_nifty_super_trend_7_3['super_trend_direction_7_1'] = df_bank_nifty_super_trend_7_1[
+        'super_trend_direction_7_3']
 
     df_bank_nifty_super_trend_7_3 = vwap(df_bank_nifty_super_trend_7_3.copy())
 

@@ -38,8 +38,8 @@ def ticks_indi_file_update():
             segment = trade_inst_record.inst_segment
             inst_name = trade_inst_record.inst_name
             inst_name_tem = ticks_indi_template.instrument_name
-            ticks_indi_template = ticks_indi_template[inst_name_tem == segment+':'+inst_name]
-            ticks_indi_file.append(ticks_indi_template.head(1), ignore_index = True)
+            ticks_indi_template = ticks_indi_template[inst_name_tem == segment + ':' + inst_name]
+            ticks_indi_file.append(ticks_indi_template.head(1), ignore_index=True)
     ticks_indi_template.to_csv('resources/account_data/account/ticks_indi.csv', index=False)
 
 

@@ -74,9 +74,9 @@ def create_user_session(user_record, firefox_driver_path):
     try:
         if (int(date.today().day)) != int(user_record.day):
             session = fyersModel.SessionModel(client_id=user_record["api_key"],
-                                               secret_key=user_record["api_secret"],
-                                               redirect_uri='http://3.111.132.88/',
-                                               response_type="code", grant_type="authorization_code")
+                                              secret_key=user_record["api_secret"],
+                                              redirect_uri='http://3.111.132.88/',
+                                              response_type="code", grant_type="authorization_code")
 
             request_token = obtain_access_token(user_record, firefox_driver_path, session)
             session.set_token(request_token)

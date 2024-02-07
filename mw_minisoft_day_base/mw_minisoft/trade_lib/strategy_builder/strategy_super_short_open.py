@@ -1,4 +1,3 @@
-
 import pandas as pd
 from datetime import timedelta
 
@@ -12,8 +11,10 @@ from mw_minisoft.trade_lib.tech_indicator.super_trend_builder import super_trend
 
 def day_open_str_data_builder(instrument_history_data, auto_inputs, instrument_name):
     default_time_frame = build_super_trend_results(instrument_history_data, period=7, multiplier=3)
-    df_bk_one_5min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7, multiplier=3)
-    df_bk_one_5min_data_7_1 = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7,multiplier=1)
+    df_bk_one_5min_data = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7,
+                                                      multiplier=3)
+    df_bk_one_5min_data_7_1 = convert_specific_time_frame(instrument_history_data, required_time_frame='5min', period=7,
+                                                          multiplier=1)
     df_bk_one_5min_data['super_trend_direction_7_1'] = df_bk_one_5min_data_7_1['super_trend_direction_7_3']
 
     df_bk_one_5min_data = df_bk_one_5min_data.reset_index()

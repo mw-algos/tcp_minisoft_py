@@ -45,7 +45,8 @@ def update_super_long_buy_side_direction(time_frame_data):
             if current_dir.super_trend_direction_7_3 != previous_dir.super_trend_direction_7_3:
                 if current_dir.super_trend_direction_7_3 == 'up' and (compare_row is None):
                     compare_row = row
-                elif current_dir.super_trend_direction_7_3 == 'up' and (compare_row is not None) and ( compare_row.update_price is None):
+                elif current_dir.super_trend_direction_7_3 == 'up' and (compare_row is not None) and (
+                        compare_row.update_price is None):
                     compare_row = row
 
             if (compare_row is not None) and (row.low > compare_row.close):

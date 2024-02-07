@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 from mw_minisoft.trade_lib.strategy_builder.strategy_super_short_open import day_open_str_data_builder

@@ -45,7 +45,8 @@ def user_positions_write():
             user_session = generate_user_session(user_record)
             user_position = pd.DataFrame(user_session.positions()['netPositions'])
             user_position = user_position[user_position['netQty'] != 0]
-            user_position.to_csv("resources/positions/"+user_record['name'].split('.')[0]+"_"+user_record.user_id+".csv")
+            user_position.to_csv(
+                "resources/positions/" + user_record['name'].split('.')[0] + "_" + user_record.user_id + ".csv")
 
         except Exception as all_errors:
             cus_logger.error("User (%s) Entering into new order Instrument position (%s) had been failed - "

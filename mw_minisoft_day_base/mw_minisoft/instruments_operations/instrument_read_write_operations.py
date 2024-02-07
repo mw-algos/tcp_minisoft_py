@@ -55,15 +55,16 @@ def filtered_instruments(inst_split_columns, instrument):
 def download_write_instrument_tokens():
     # initialize data of lists.
     cus_logger.info('Downloading instrument tokens Started')
-    inst_urls = pd.read_csv(ACCOUNTS_FOLDER+'inst_links.csv')
+    inst_urls = pd.read_csv(ACCOUNTS_FOLDER + 'inst_links.csv')
     columns = ["Fytoken", "Symbol Details", "Exchange Instrument type", "Minimum lot size", "Tick size", "ISIN",
-               "Trading Session", "Last update date", "Expiry date", "Symbol ticker","Exchange", "Segment",
+               "Trading Session", "Last update date", "Expiry date", "Symbol ticker", "Exchange", "Segment",
                "Scrip code", "Underlying scrip code", "Strike price", "Option type", 'new one', 'new one_2']
     inst_data = pd.DataFrame()
     try:
         for inst_url_record_index, inst_url_record in inst_urls.iterrows():
             segment_url_data = pd.read_csv(inst_url_record.urls)
-            segment_url_data_filter_unnamed = segment_url_data.loc[:, ~segment_url_data.columns.str.contains('^Unnamed')]
+            segment_url_data_filter_unnamed = segment_url_data.loc[:,
+                                              ~segment_url_data.columns.str.contains('^Unnamed')]
             df_url_csv_data = pd.DataFrame(segment_url_data_filter_unnamed.values)
             inst_data = pd.concat([inst_data, df_url_csv_data])
         inst_data.columns = columns

@@ -1,6 +1,6 @@
 # Packaging Trade Login, Indicator, and Logger python code
 
-**Created this package based on this** 
+**Created this package based on this**
 
     https://packaging.python.org/en/latest/tutorials/packaging-projects/
 
@@ -31,7 +31,6 @@
       example-package-YOUR-USERNAME-HERE-0.0.1-py3-none-any.whl
     
       example-package-YOUR-USERNAME-HERE-0.0.1.tar.gz
-
 
 **Uploading the distribution archives, crate account pypi website**
 

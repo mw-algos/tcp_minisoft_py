@@ -33,10 +33,12 @@ def strategy_builder_stg_retrace_ment(instr_days_data, instr_days):
                         first_candle_close = current_candle_dict_info['cur_close']
                         if (current_record_direction == 'up') & (row_record.close > first_candle_close):
                             instr_days_data.loc[row_number, 'stg_retrace_ment'] = 'up_entry'
-                            instr_day_orders = instr_day_orders.append(instr_days_data.loc[row_number], ignore_index=True)
+                            instr_day_orders = instr_day_orders.append(instr_days_data.loc[row_number],
+                                                                       ignore_index=True)
                         elif (current_record_direction == 'down') & (row_record.close < first_candle_close):
                             instr_days_data.loc[row_number, 'stg_retrace_ment'] = 'down_entry'
-                            instr_day_orders = instr_day_orders.append(instr_days_data.loc[row_number], ignore_index=True)
+                            instr_day_orders = instr_day_orders.append(instr_days_data.loc[row_number],
+                                                                       ignore_index=True)
 
             elif (instr_day_orders.shape[0] == 1) & (current_time >= exit_time):
                 instr_positional_orders_ = instr_day_orders.iloc[0]

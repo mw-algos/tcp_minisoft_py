@@ -1,6 +1,5 @@
 from os import path
 
-
 from mw_minisoft.order_management.order_buy_sell_operations import *
 from mw_minisoft.persistence_operations.account_management import *
 from mw_minisoft.trade_lib.session_builder.retrive_request_token import generate_user_session
@@ -52,9 +51,12 @@ def place_instrument_user_orders(auto_inputs, inst_order_record, inst_record, us
     inst_user_order_file_name = create_indicator_user_order_file(user_id, inst_token, inst_data_interval)
     if path.exists(inst_user_order_file_name):
         inst_user_orders_data = pd.read_csv(inst_user_order_file_name)
-        inst_user_orders_data_ = inst_user_orders_data[inst_user_orders_data['inst_strategy'] == inst_order_record.iloc[-1]['inst_strategy']]
-        inst_user_orders_filtered_ = inst_user_orders_data_[inst_user_orders_data_['inst_option_name'] == inst_order_record.iloc[-1]['inst_option_name']]
-        inst_user_orders_last_record = inst_user_orders_filtered_[inst_user_orders_filtered_['inst_direction'] == inst_order_record.iloc[-1]['inst_direction']]
+        inst_user_orders_data_ = inst_user_orders_data[
+            inst_user_orders_data['inst_strategy'] == inst_order_record.iloc[-1]['inst_strategy']]
+        inst_user_orders_filtered_ = inst_user_orders_data_[
+            inst_user_orders_data_['inst_option_name'] == inst_order_record.iloc[-1]['inst_option_name']]
+        inst_user_orders_last_record = inst_user_orders_filtered_[
+            inst_user_orders_filtered_['inst_direction'] == inst_order_record.iloc[-1]['inst_direction']]
         if inst_user_orders_last_record.shape[0] > 0:
             inst_user_orders_last_record = inst_user_orders_last_record.tail(1)
             inst_user_orders_last_record_date = pd.to_datetime(inst_user_orders_last_record.iloc[-1]['inst_date'])
@@ -90,13 +92,14 @@ def place_instrument_user_orders_based_position(inst_order_last_record, inst_rec
     if user_net_positions.shape[0] > 0 and user_net_positions[user_net_positions['qty'] != 0].shape[0] > 0:
         user_net_positions = user_net_positions[user_net_positions.symbol == inst_order_last_record.inst_option_name]
         if (user_net_positions.shape[0] > 0) and ('exit' in str(inst_order_last_record.inst_direction)):
-            cus_logger.info('clearing existing positions %s As holding quantity', inst_order_last_record.inst_option_name)
+            cus_logger.info('clearing existing positions %s As holding quantity',
+                            inst_order_last_record.inst_option_name)
             user_position_exit(inst_order_last_record, inst_record, user_record, user_session)
         elif (user_net_positions.shape[0] == 0) and ('entry' in str(inst_order_last_record.inst_direction)):
-            cus_logger.info('Entering into instrument position %s As quantity zero', inst_order_last_record.inst_option_name)
+            cus_logger.info('Entering into instrument position %s As quantity zero',
+                            inst_order_last_record.inst_option_name)
             user_position_enter(inst_order_last_record, inst_record, user_record, user_session)
     else:
-        cus_logger.info('Entering into new instrument position %s As quantity zero', inst_order_last_record.inst_option_name)
+        cus_logger.info('Entering into new instrument position %s As quantity zero',
+                        inst_order_last_record.inst_option_name)
         user_position_enter(inst_order_last_record, inst_record, user_record, user_session)
-
-

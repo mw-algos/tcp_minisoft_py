@@ -1,1 +1,6 @@
 /mw_minisoft_day_base/resources/
+/mw_minisoft_day_base/.idea
+mw_minisoft_day_base/fyersApi.log
+mw_minisoft_day_base/mw_minisoft/common_operatinos/__pycache__/__init__.cpython-310.pyc
+mw_minisoft_day_base/mw_minisoft/common_operatinos/__pycache__/common_ops.cpython-310.pyc
+mw_minisoft_day_base/mw_minisoft_log_file.log

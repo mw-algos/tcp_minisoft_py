@@ -1,6 +1,0 @@
-inst_segment,inst_name,inst_data_name,inst_expiry_date,inst_current_date,inst_date_diff,inst_day_high,inst_day_low,lock_low,lock_high
-NSE,MIDCPNIFTY,MIDCPNIFTY,2024-02-12,2024-02-06,6,0.0,0.0,N,N
-NSE,FINNIFTY,FINNIFTY,2024-02-06,2024-02-06,0,0.0,0.0,N,N
-NSE,BANKNIFTY,NIFTYBANK,2024-02-07,2024-02-06,1,0.0,0.0,N,N
-NSE,NIFTY,NIFTY50,2024-02-08,2024-02-06,2,0.0,0.0,N,N
-BSE,SENSEX,SENSEX,2024-02-09,2024-02-06,3,0.0,0.0,N,N

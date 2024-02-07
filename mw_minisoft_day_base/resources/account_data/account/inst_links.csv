@@ -1,0 +1,7 @@
+segments,urls
+Currency,https://public.fyers.in/sym_details/NSE_CD.csv
+NSE_Capital,https://public.fyers.in/sym_details/NSE_CM.csv
+NSE_Equity,https://public.fyers.in/sym_details/NSE_FO.csv
+MCX,https://public.fyers.in/sym_details/MCX_COM.csv
+BSE_CAPITAL,https://public.fyers.in/sym_details/BSE_CM.csv
+BSE_Equity,https://public.fyers.in/sym_details/BSE_FO.csv

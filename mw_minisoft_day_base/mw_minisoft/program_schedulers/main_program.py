@@ -58,7 +58,7 @@ def remove_create_dir():
     All files such as order, user order, and ticks will be deleted.
     """
     # folders = [ORDERS_FOLDER_, TICKS_FOLDER_, USER_ORDERS_FOLDER_, USER_ORDERS_POSITIONS_]
-    folders = [TICKS_FOLDER_, USER_ORDERS_POSITIONS_]
+    folders = [TICKS_FOLDER_, USER_ORDERS_POSITIONS_, ORDERS_FOLDER_, USER_ORDERS_FOLDER_]
     cus_logger.info('The process of deleting old files has begun.')
     for folder in folders:
         for filename in os.listdir(folder):

@@ -34,7 +34,7 @@ def ticks_indi_file_update():
     ticks_indi_file = ticks_indi_file.iloc[0:0]
 
     for trade_inst_index, trade_inst_record in trade_inst.iterrows():
-        if trade_inst_record.inst_date_diff == 0:
+        if trade_inst_record.inst_date_diff == 1:
             segment = trade_inst_record.inst_segment
             inst_name = trade_inst_record.inst_name
             inst_name_tem = ticks_indi_template.instrument_name

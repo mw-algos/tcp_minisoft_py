@@ -46,7 +46,6 @@ def strategy_execution_steps(auto_inputs):
     the order management process will begin.
     """
     # user_account_balance()
-    ticks_indi_file_update()
     generate_historical_data(auto_inputs)
     model_indicator_data_generator(auto_inputs)
     storage_regular_orders(auto_inputs)
@@ -83,6 +82,7 @@ def execute_strategy_programs():
         calculate_expiry_date()
         ticks_indi_file_update()
         remove_create_dir()
+        ticks_indi_file_update()
 
     strategy_execution_steps(auto_inputs)
     cus_logger.info("strategy execution completed")

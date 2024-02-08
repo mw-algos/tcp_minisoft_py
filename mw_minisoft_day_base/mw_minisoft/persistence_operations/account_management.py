@@ -176,14 +176,16 @@ def entry_time_l(instrument_name):
         entry_time_ = '09:00:00'
     elif 'MCX' in instrument_name:
         entry_time_ = '09:00:00'
+    elif 'BSE' in instrument_name:
+        entry_time_ = '09:15:00'
     return entry_time_
 
 
 def exit_time_l(instrument_name):
     exit_time_ = '15:30:00'
-    if ('NSE' in instrument_name) and ('NIFTY' in instrument_name):
+    if 'NSE' in instrument_name and 'NIFTY' in instrument_name or 'BSE' in instrument_name:
         exit_time_ = '15:29:00'
-    elif ('NSE' in instrument_name) and ('INR' in instrument_name):
+    elif 'NSE' in instrument_name and 'INR' in instrument_name:
         exit_time_ = '16:58:00'
     elif 'MCX' in instrument_name:
         exit_time_ = '23:58:00'
@@ -202,6 +204,8 @@ def market_status(ticks):
     if auto_inputs.iloc[0].env == 'test':
         status = True
     elif 'NSE' in ticks and 'NIFTY' in ticks and before_mkt and after_mkt:
+        status = True
+    elif 'BSE' in ticks and before_mkt and after_mkt:
         status = True
     elif 'NSE' in ticks and 'INR' in ticks and before_mkt and after_mkt:
         status = True

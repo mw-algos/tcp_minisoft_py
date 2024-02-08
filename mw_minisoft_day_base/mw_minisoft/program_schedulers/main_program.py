@@ -28,19 +28,16 @@ def user_account_balance():
 
 def ticks_indi_file_update():
     trade_inst = pd.read_csv('resources/account_data/account/trade_inst.csv')
-
     ticks_indi_template = pd.read_csv('resources/account_data/account/ticks_indi_template.csv')
-    ticks_indi_file = pd.read_csv('resources/account_data/account/ticks_indi.csv')
-    ticks_indi_file = ticks_indi_file.iloc[0:0]
-
+    ticks_indi_file = pd.DataFrame()
     for trade_inst_index, trade_inst_record in trade_inst.iterrows():
-        if trade_inst_record.inst_date_diff == 1:
+        if trade_inst_record.inst_date_diff in [0, 1]:
             segment = trade_inst_record.inst_segment
             inst_name = trade_inst_record.inst_name
             inst_name_tem = ticks_indi_template.instrument_name
-            ticks_indi_template = ticks_indi_template[inst_name_tem == segment + ':' + inst_name]
-            ticks_indi_file.append(ticks_indi_template.head(1), ignore_index=True)
-    ticks_indi_template.to_csv('resources/account_data/account/ticks_indi.csv', index=False)
+            ticks_indi_template_ = ticks_indi_template[inst_name_tem == segment + ':' + inst_name]
+            ticks_indi_file = pd.concat([ticks_indi_file, ticks_indi_template_.tail(1)], ignore_index=True)
+    ticks_indi_file.to_csv('resources/account_data/account/ticks_indi.csv', index=False)
 
 
 def strategy_execution_steps(auto_inputs):
@@ -49,6 +46,7 @@ def strategy_execution_steps(auto_inputs):
     the order management process will begin.
     """
     # user_account_balance()
+    ticks_indi_file_update()
     generate_historical_data(auto_inputs)
     model_indicator_data_generator(auto_inputs)
     storage_regular_orders(auto_inputs)

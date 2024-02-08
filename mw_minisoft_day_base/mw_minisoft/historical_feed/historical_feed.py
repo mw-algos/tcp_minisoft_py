@@ -168,7 +168,8 @@ def model_indicator_data_generator(auto_inputs):
     columns = ['instrument_trading_symbol', 'instrument_name']
     ticks_indicator_df = ticks_indicator_df[columns].drop_duplicates(subset=['instrument_name'])
     for record_position, indicator_record in ticks_indicator_df.iterrows():
-        if market_status(indicator_record.instrument_name):
+        mk_status = market_status(indicator_record.instrument_name)
+        if mk_status:
             instrument_history_data = read_data_file(indicator_record.instrument_trading_symbol.replace(':', '_'),
                                                      TICKS_FOLDER_, auto_inputs['data_interval'][0])
 

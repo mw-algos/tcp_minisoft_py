@@ -202,7 +202,7 @@ def inst_strategy_dos_execution(auto_inputs, inst_record, sp_user_session, strat
     exit_time_ = exit_entry_time(inst_name)
     current_time = datetime.now().time().strftime('%H:%M:%S')
     before_mkt = current_time < exit_time_
-    before_mkt = True
+    #before_mkt = True
     if inst_last_record_dir != inst_first_record_dir and before_mkt and inst_last_record_dir != 'nan':
         if file_exists := path.exists(inst_order_file_name):
             inst_order_data_filtered = inst_orders_filtered(inst_order_file_name, inst_record, strategy_name)
@@ -341,8 +341,9 @@ def inst_order_preparation(file_exists, inst_last_record_dir, inst_order_file_na
 
 def create_inst_order_record(ind_record, inst_last_record_dir, inst_strategy_data, inst_name,
                              strategy_name, inst_order_file_name, sp_user_session):
-    future_price = (sp_user_session.quotes({"symbols": inst_name}))['d'][0]['v']['lp']
-    instrument_details = read_instrument_tokens(ind_record.instrument_name.split(':')[1], future_price,
+    quote_info = (sp_user_session.quotes({"symbols": inst_name}))['d'][0]['v']
+    future_price_last_price = quote_info['lp']
+    instrument_details = read_instrument_tokens(ind_record.instrument_name.split(':')[1], quote_info,
                                                 inst_last_record_dir, ind_record.instrument_name.split(':')[0],
                                                 ind_record.instrument_expiry_date)
     instrument_details = instrument_details.iloc[-1]
@@ -356,7 +357,7 @@ def create_inst_order_record(ind_record, inst_last_record_dir, inst_strategy_dat
         inst_option_type = order_file_.inst_option_type
     multi_order_qty_ = multi_order_qty_normal_order(ind_record)
     return {'inst_date': inst_strategy_data.iloc[1].date, 'inst_name': inst_name,
-            'inst_strategy': strategy_name, 'inst_price': future_price, 'inst_option_name': inst_option_name,
+            'inst_strategy': strategy_name, 'inst_price': future_price_last_price, 'inst_option_name': inst_option_name,
             'inst_option_type': inst_option_type, 'inst_qty': multi_order_qty_,
             'inst_direction': inst_last_record_dir, 'inst_exchange': ind_record.instrument_name.split(':')[0],
             'inst_expiry_date': ind_record.instrument_expiry_date}

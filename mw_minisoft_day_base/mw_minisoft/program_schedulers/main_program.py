@@ -31,7 +31,7 @@ def ticks_indi_file_update():
     ticks_indi_template = pd.read_csv('resources/account_data/account/ticks_indi_template.csv')
     ticks_indi_file = pd.DataFrame()
     for trade_inst_index, trade_inst_record in trade_inst.iterrows():
-        if trade_inst_record.inst_date_diff in [0, 1]:
+        if trade_inst_record.inst_date_diff not in [0]:
             segment = trade_inst_record.inst_segment
             inst_name = trade_inst_record.inst_name
             inst_name_tem = ticks_indi_template.instrument_name

@@ -75,14 +75,12 @@ def execute_strategy_programs():
     auto_inputs = pd.read_csv(AUTO_INPUTS_FILE)
     user_info = pd.read_csv(USER_INPUTS_FILE)
     user_info = user_info[user_info.day != date.today().day]
-
     if user_info.shape[0] > 0:
         download_each_user_tokens()
         download_write_instrument_tokens()
         calculate_expiry_date()
         ticks_indi_file_update()
         remove_create_dir()
-        ticks_indi_file_update()
 
     strategy_execution_steps(auto_inputs)
     cus_logger.info("strategy execution completed")

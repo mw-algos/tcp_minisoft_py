@@ -78,14 +78,13 @@ def ticks_indi():
 def calculate_expiry_date():
     trade_inst = pd.read_csv(f'{ACCOUNTS_FOLDER}trade_inst.csv')
     for ticks_info_position, ticks_info_record in trade_inst.iterrows():
+        new_columns = ['script', 'year', 'mon', 'day', 'strike_price']
         instruments = pd.read_csv(INSTRUMENTS_DATA_FILE, low_memory=False)
-        instruments = instruments[
-            (instruments['Scrip code'] == ticks_info_record.inst_name) & (instruments['Option type'] == 'CE')]
-        instruments[['script', 'year', 'mon', 'day', 'strike_price']] = instruments['Symbol Details'].str.split(' ',
-                                                                                                                expand=True).iloc[
-                                                                        :, 0:5]
-        instrument_days = (
-            pd.to_datetime((instruments['year'] + instruments['mon'] + instruments['day']), format='%y%b%d')).dt.date
+        instruments = instruments[(instruments['Underlying symbol'] == ticks_info_record.inst_name)]
+        instruments = instruments[(instruments['Option type'] == 'CE')]
+        instruments[new_columns] = instruments['Symbol Details'].str.split(' ',expand=True).iloc[:, 0:5]
+        instrument_date = (instruments['year'] + instruments['mon'] + instruments['day'])
+        instrument_days = (pd.to_datetime(instrument_date, format='%y%b%d')).dt.date
         expiry_day = (instrument_days[instrument_days >= datetime.now().date()]).head(1)
         expiry_day_record = instruments.loc[expiry_day.index.values[0]]
         expiry_day = ((pd.to_datetime((expiry_day_record['year'] + expiry_day_record['mon'] + expiry_day_record['day']),

@@ -314,11 +314,10 @@ def inst_order_preparation(file_exists, inst_last_record_dir, inst_order_file_na
                            inst_strategy_data, inst_name, sp_user_session, strategy_name):
     cus_logger.info('Instrument(%s) order type (%s) available', inst_name, inst_last_record_dir)
     strategy_builder_orders = pd.DataFrame()
-
+    inst_order_record = create_inst_order_record(inst_record, inst_last_record_dir,
+                                                 inst_strategy_data, inst_name, strategy_name,
+                                                 inst_order_file_name, sp_user_session)
     if file_exists:
-        inst_order_record = create_inst_order_record(inst_record, inst_last_record_dir,
-                                                     inst_strategy_data, inst_name, strategy_name,
-                                                     inst_order_file_name, sp_user_session)
         inst_order_record_ = strategy_builder_orders.append(inst_order_record, ignore_index=True)
         inst_order_data = pd.read_csv(inst_order_file_name)
         inst_order_data = inst_order_data.append(inst_order_record_.iloc[-1], ignore_index=True)
@@ -328,9 +327,6 @@ def inst_order_preparation(file_exists, inst_last_record_dir, inst_order_file_na
         place_instrument_orders(auto_inputs, inst_record)
         cus_logger.info('appended the new position order into the file')
     else:
-        inst_order_record = create_inst_order_record(inst_record, inst_last_record_dir,
-                                                     inst_strategy_data, inst_name, strategy_name,
-                                                     inst_order_file_name, sp_user_session)
         strategy_builder_orders = strategy_builder_orders.append(inst_order_record, ignore_index=True)
         strategy_builder_orders.to_csv(inst_order_file_name, index=False)
         auto_inputs = pd.read_csv(AUTO_INPUTS_FILE)
@@ -347,7 +343,7 @@ def create_inst_order_record(ind_record, inst_last_record_dir, inst_strategy_dat
                                                 inst_last_record_dir, ind_record.instrument_name.split(':')[0],
                                                 ind_record.instrument_expiry_date)
     instrument_details = instrument_details.iloc[-1]
-    inst_option_name = instrument_details['Expiry date']
+    inst_option_name = instrument_details['Symbol ticker']
     inst_option_type = instrument_details['Option type']
 
     if 'exit' in inst_last_record_dir:
